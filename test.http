@@ -1,0 +1,8 @@
+POST http://127.0.0.1:5000/add_client
+Content-Type: application/json
+
+{
+    "name": "Ivan",
+    "login": "TEST_VIRTUAL_ACCOUNT_TWO",
+    "password": "jsahgh"
+}
