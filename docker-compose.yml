@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+
+  add_client_api:
+    container_name: add_client_api
+    build: .
+    environment:
+      TZ: Europe/Moscow
+      PG_USER: ${PG_USER}
+      PG_PASSWORD: ${PG_PASSWORD}
+      PG_DB: ${PG_DB}
+      PG_HOST: ${PG_HOST}
+      PG_PORT: ${PG_PORT}
+      SSLMODE: ${SSLMODE}
+      TARGET_SESSION_ATTRS: ${TARGET_SESSION_ATTRS}
+    #command: sh script.sh
+
+
+  nginx:
+    container_name: nginx_add_client_api
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - add_client_api
+    restart: always
+    environment:
+      - "TZ=Europe/Moscow"
+    ports:
+      - 8087:81
+      - 4437:444
+      - 3057:3000

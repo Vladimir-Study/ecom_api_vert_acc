@@ -2,7 +2,6 @@ from flask import Flask
 from flask_restx import Api, Resource, reqparse, abort
 from flask_jwt_extended import JWTManager, create_access_token  
 from datetime import timedelta
-from sqlalchemy import create_engine
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from dotenv import load_dotenv
 from pprint import pprint
@@ -73,7 +72,7 @@ class ClientAccount(Resource):
                 password = args['password']
                 salt = os.urandom(16)
                 key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 10000, dklen=16)
-                cursor.execute(f"INSERT INTO client (name, login, salt, active_hex) "
+                cursor.execute(f"INSERT INTO client (name, login, pass, active_hex) "
                                f"VALUES ('{args['name']}', '{args['login']}', '{salt.hex()}', '{key.hex()}') "
                                f"RETURNING id")
                 client_id = cursor.fetchone()
@@ -103,4 +102,4 @@ class ClientAccount(Resource):
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=3000)

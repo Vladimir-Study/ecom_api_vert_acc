@@ -3,6 +3,6 @@ Content-Type: application/json
 
 {
     "name": "Ivan",
-    "login": "TEST_VIRTUAL_ACCOUNT_TWO",
+    "login": "TEST_VIRTUAL_ACCOUNT_FOUR",
     "password": "jsahgh"
 }
